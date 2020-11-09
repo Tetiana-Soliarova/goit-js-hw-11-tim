@@ -118,7 +118,101 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.js":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 console.log('Привет, Мир!');
+var refs = {
+  //timersClock: document.querySelector(#timer - 1),
+  timerDays: document.querySelector('span[data-value="days"]'),
+  timerHours: document.querySelector('span[data-value="hours"]'),
+  timerMins: document.querySelector('span[data-value="mins"]'),
+  timerSeconds: document.querySelector('span[data-value="secs"]')
+};
+
+var CountdownTimer = /*#__PURE__*/function () {
+  function CountdownTimer(_ref) {
+    var selector = _ref.selector,
+        targetDate = _ref.targetDate,
+        onTick = _ref.onTick;
+
+    _classCallCheck(this, CountdownTimer);
+
+    this.selector = selector; //this.selector = document.querySelector('#timer-1') ;
+    //this.selector = document.querySelector(selector);
+
+    this.targetDate = targetDate;
+    this.onTick = onTick;
+  } //Создаем запуск времени - старт. При запуске время должно считать с начала, сохранить текущее время
+
+
+  _createClass(CountdownTimer, [{
+    key: "start",
+    value: function start() {
+      var _this = this;
+
+      // const targetDate = Date.now();// стартовое время
+      //dateTimes.targetDate = Date.now();
+      setInterval(function () {
+        var currentTime = Date.now(); //текущее время
+
+        var deltaTime = _this.targetDate - currentTime; // const time{ days, hours, mins, secs } = this.getTimeComponents(deltaTime);
+
+        var time = _this.getTimeComponents(deltaTime); //this.onTick(time);
+
+
+        console.log(time);
+
+        _this.onTick(time); //console.log(`${days}:${hours}:${mins}:${secs}`);
+
+      }, 1000);
+    }
+  }, {
+    key: "pad",
+    value: function pad(value) {
+      return String(value).padStart(2, '0');
+    }
+  }, {
+    key: "getTimeComponents",
+    value: function getTimeComponents(time) {
+      var days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+      var hours = this.pad(Math.floor(time % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)));
+      var mins = this.pad(Math.floor(time % (1000 * 60 * 60) / (1000 * 60)));
+      var secs = this.pad(Math.floor(time % (1000 * 60) / 1000));
+      return {
+        days: days,
+        hours: hours,
+        mins: mins,
+        secs: secs
+      };
+    }
+  }]);
+
+  return CountdownTimer;
+}(); //Принимает число приводит к строке добавляет знак спереди 0
+
+
+var timer = new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('Dec 31, 2020'),
+  onTick: updateClockface
+});
+
+function updateClockface(_ref2) {
+  var days = _ref2.days,
+      hours = _ref2.hours,
+      mins = _ref2.mins,
+      secs = _ref2.secs;
+  refs.timerDays.textContent = "".concat(days);
+  refs.timerHours.textContent = "".concat(hours);
+  refs.timerMins.textContent = "".concat(mins);
+  refs.timerSeconds.textContent = "".concat(secs);
+}
+
+timer.start();
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
