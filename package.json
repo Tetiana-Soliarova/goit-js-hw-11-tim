@@ -1,0 +1,24 @@
+{
+  "name": "goit-js-hw-11-tim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tetiana-Soliarova/goit-js-hw-11-tim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tetiana-Soliarova/goit-js-hw-11-tim/issues"
+  },
+  "homepage": "https://github.com/Tetiana-Soliarova/goit-js-hw-11-tim#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
